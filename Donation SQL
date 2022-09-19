@@ -1,0 +1,58 @@
+--Looking at both datasets of our project 
+SELECT *
+From Donation_Data
+JOIN Donor_Data2
+ON Donation_Data.id= Donor_Data2.id;
+
+-- Finding out the sum of donations per gender and the number of donors per gender
+SELECT  gender , COUNT(*), SUM(donation)
+FROM Donation_Data
+JOIN Donor_Data2
+ON Donation_Data.id= Donor_Data2.id
+GROUP BY gender;
+
+--Identifying the sum of donations by the state in descending order
+SELECT  state, SUM(donation)
+FROM Donation_data
+JOIN Donor_Data2
+ON Donation_Data.id=Donor_Data2.id
+GROUP BY Donation_Data.state
+ORDER BY SUM(donation) DESC;
+
+-- Identifying the sum of donations by job field in descending order
+SELECT job_field,SUM(donation)
+FROM Donation_Data
+GROUP BY job_field
+ORDER BY SUM(donation) DESC;
+
+-- Maximum , minimum and average donotion and the number of donors
+SELECT MAX(donation),MIN(donation),AVG(donation),COUNT(donation)
+FROM Donation_Data;
+SELECT *
+FROM Donor_Data2;
+
+-- Identifying the count of donations by frequency
+SELECT COUNT(*), donation_frequency
+FROM Donation_Data
+JOIN Donor_Data2
+ON Donation_Data.id= Donor_Data2.id
+GROUP BY Donor_Data2.donation_frequency
+ORDER BY COUNT(*) DESC;
+
+--How much money was frequently donated per donor.Limit values to the first five amounts
+SELECT donation, COUNT(*) as cnt
+FROM Donation_Data
+JOIN Donor_Data2
+ON Donation_Data.id=Donor_Data2.id
+GROUP BY Donation_Data.donation
+ORDER BY cnt DESC
+LIMIT 5;
+
+-- Is the mode amount correlated to other aspects of those donors
+SELECT *
+FROM Donation_Data;
+SELECT *
+FROM Donation_Data
+JOIN Donor_Data2
+ON Donation_Data.id=Donor_Data2.id
+WHERE Donation_Data.donation = 482;
